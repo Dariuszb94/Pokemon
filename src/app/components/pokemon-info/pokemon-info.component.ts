@@ -7,10 +7,10 @@ import {PokemonesService} from "../../services/pokemones.service"
   styleUrls: ['./pokemon-info.component.css']
 })
 export class PokemonInfoComponent implements OnInit {
-
+pokemon:any[]=[];
   constructor(private ParamsRouter:ActivatedRoute, private pokemonService:PokemonesService) {
     this.ParamsRouter.params.subscribe(params=>{
-      console.log(this.pokemonService.getPokemon(params['id']));
+      this.pokemon=this.pokemonService.getPokemon(params['id']);
       
     })
    }
