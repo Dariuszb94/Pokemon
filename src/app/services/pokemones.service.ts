@@ -59,5 +59,16 @@ pokeArr.push(pokemon);
 
     return pokeArr;
   }
+ searchPokemon(value:string){
+   let pokeArr=[];
+   value=value.toLowerCase();
+   for (let pokemon of this.pokemones){
+     let name = pokemon.name.toLocaleLowerCase();
+     if(name.indexOf(value) >= 0){
+       pokeArr.push(pokemon);
+     }
+   }
+   return pokeArr;
+ }
   constructor() { }
 }
