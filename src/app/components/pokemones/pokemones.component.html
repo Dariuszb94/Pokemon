@@ -5,7 +5,7 @@
     <div class="col-md-3" *ngFor="let pokemon of pokemones">
         <div class="list-group">
             <a [routerLink]="['/pokemon',pokemon.id]" class="list-group-item list-group-item-action active">
-            <img class="img-responsive" src="../../../assets/img/{{pokemon.image}}" alt="{{pokemon.name}}">
+            <img class="img-responsive" src="/assets/img/{{pokemon.image}}" alt="{{pokemon.name}}">
             </a>
             <a href="#" class="list-group-item list-group-item-action white-color text-center">{{pokemon.name}}
             </a>
