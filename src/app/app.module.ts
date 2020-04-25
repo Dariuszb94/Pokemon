@@ -10,7 +10,8 @@ import { HomeComponent } from './components/home/home.component';
 import { PokemonesComponent } from './components/pokemones/pokemones.component';
 import { PokemonInfoComponent } from './components/pokemon-info/pokemon-info.component';
 import { SearchPokemonComponent } from './components/search-pokemon/search-pokemon.component';
-
+import {HttpClientModule} from '@angular/common/http';
+import {DataService} from './data.service'
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,9 +24,10 @@ import { SearchPokemonComponent } from './components/search-pokemon/search-pokem
   imports: [
     BrowserModule,
     AppRoutingModule,
-    POKE_ROUTING
+    HttpClientModule,
+    POKE_ROUTING,
   ],
-  providers: [],
+  providers: [DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
