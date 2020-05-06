@@ -16,7 +16,9 @@
     ],
     "lib": [
       "es2018",
-      "dom"
+      "dom",
+       "es2015",
+        "es2018.promise"
     ]
   },
   "angularCompilerOptions": {

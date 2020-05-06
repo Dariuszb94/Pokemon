@@ -19,15 +19,17 @@ import {DataService} from './data.service'
     HomeComponent,
     PokemonesComponent,
     PokemonInfoComponent,
-    SearchPokemonComponent
+    SearchPokemonComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     POKE_ROUTING,
+
+    
   ],
   providers: [DataService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }

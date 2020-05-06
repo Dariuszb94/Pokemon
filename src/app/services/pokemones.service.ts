@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+
 export interface PokemonRules{
   id:number;
   name:string;
@@ -72,4 +73,5 @@ pokeArr.push(pokemon);
    return pokeArr;
  }
   constructor(private httpClient: HttpClient) { }
+  
 }

@@ -1,26 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import {DataService} from './data.service';
-import {User} from './user.model'
+import { Component } from '@angular/core';
+import {PokemonesComponent} from './components/pokemones/pokemones.component'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements OnInit{
+export class AppComponent {
   title = 'pokemon';
-  users$:User[];
-  constructor(private dataService:DataService){
- 
-  }
-
-  ngOnInit(){
-  
-this.dataService.getUsers()
-.subscribe(data => this.users$=data["results"]);
-
-
-
-  }
   
 }
