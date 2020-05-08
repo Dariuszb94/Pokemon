@@ -1,2 +1,2 @@
 
-It's angular pokedex app.
+It's angular pokedex app
