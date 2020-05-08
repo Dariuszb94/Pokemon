@@ -1,25 +1,32 @@
-<div class="page-header">
-    <p>sdasdas</p>
-    {{this.pokemonData.name}}
-        <button type="button" class="btn btn-secondary"><a [routerLink]="['/pokemones']">&larr; Back</a></button>
+<div class="container">
+  <header>
+    <h1>{{this.pokemonData.name| titlecase}}</h1>
+  </header>
+  <main>
+    <section>
+      <img [src]="pokemonImg" alt="pokemonData.name">
+    </section>
+    <section class="section-container">
+      <article class="animate-left">
+        <h3>Type</h3>
+        <ul class="unordered-list">
+          <li *ngFor="let type of pokemonTypes">{{ type.type.name| titlecase }}</li>
+        </ul>
+      </article>
+      <article class="animate-right">
+        <h3>Moves</h3>
+        <ul class="unordered-list">
+          <li *ngFor="let move of pokemonMoves">{{ move| titlecase }}</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+  <footer>
+    <button type="button" class="btn btn-secondary">
+      <a [routerLink]="['/pokemones']">&larr; Back</a>
+    </button>
+  </footer>
 </div>
-
-
-   
-
-            <img class="img-responsive" [src]="pokemonImg" alt="">
-         
-            <ul>
-                <li *ngFor="let type of pokemonTypes">
-                  {{ type.type.name }}
-                </li>
-              </ul>
-              <ul>
-                <li *ngFor="let move of pokemonMoves">
-                  {{ move.move.name }}
-                </li>
-              </ul>
- 
 
 
 

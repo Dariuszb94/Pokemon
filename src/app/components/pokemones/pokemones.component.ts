@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {PokemonesService,PokemonRules} from '../../services/pokemones.service';
 import {DataService} from '../../data.service';
 import { HttpClient } from '@angular/common/http';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -12,22 +11,38 @@ import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 })
 
 export class PokemonesComponent implements OnInit {
-  pokemonData:{} ;
-  pokemons:[];
-  constructor(private _pokemones:PokemonesService, private dataService:DataService, private _http:HttpClient, private routes:Router) { }
 
+  pokemonData:{} ;
+  pokemons:any;
+
+  constructor(private dataService:DataService, private _http:HttpClient, private routes:Router) { }
+
+  /**
+   * Initial with header spaced around and displayed searchbar, then intitalize getting the pokemons.
+   * Also hiding the message of no internet.
+   */
   ngOnInit(): void {
+    document.getElementById("header").style.justifyContent = "space-around";
+    document.getElementById('searchBar').style.display = 'flex'
     this.getPokemons();
     this.dataService.currentPokemon.subscribe(pokemonData => this.pokemonData = pokemonData); //sharing pokemon info with "pokemon-info-component"
+    document.getElementById('noInternet').style.display = 'none'
   }
 
-  /*
+  /** 
    * Getting 151 pokemons on init
    * @returns {array}
    */ 
   getPokemons(){
     this.dataService.getPokemons()
-    .subscribe(data => this.pokemons=data["results"]);
+    .subscribe(
+      data => {this.pokemons=data["results"]},
+      err =>  document.getElementById('noInternet').style.display = '',
+      () => {
+        if (this.pokemons)
+        this.dataService.pokemonList(this.pokemons);
+      }
+      );
   }
 
   /**
@@ -35,16 +50,24 @@ export class PokemonesComponent implements OnInit {
   * @returns {object}
   */
   getOnePokemon(x) {
-    this.dataService.fetchOnePokemon(x).subscribe(
+    this.dataService.fetchOnePokemon(x)
+      .subscribe(
         data => { this.pokemonData = data},
-          err => console.error(err),
-          () => {console.log(this.pokemonData);
-            this.dataService.changeMessage(this.pokemonData);
-            this.routes.navigate(['/pokemon',"info"]);
-          }
-        );
-        console.log(this.pokemons);
-      }     
+        err => console.error(err),
+        () => {this.pokemonData;
+          this.dataService.changeMessage(this.pokemonData);
+          this.routes.navigate(['/pokemon',"info"]);
+        }
+      );
+  }
+  
+  /**
+   * Share pokemonList
+   */
+  pokemonList() {
+    if (this.pokemons)
+      this.dataService.pokemonList(this.pokemons);
+  }  
 }
 
 

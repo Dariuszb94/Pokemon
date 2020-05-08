@@ -1,23 +1,30 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute} from "@angular/router" 
-import {PokemonesService} from "../../services/pokemones.service"
 import { DataService} from "../../data.service"
-import {PokemonesComponent} from "../pokemones/pokemones.component"
+
 @Component({
   selector: 'app-pokemon-info',
   templateUrl: './pokemon-info.component.html',
   styleUrls: ['./pokemon-info.component.css']
 })
 export class PokemonInfoComponent implements OnInit {
+
   pokemonData:any;
-  constructor(private ParamsRouter:ActivatedRoute, private pokemonService:PokemonesService, private dataService: DataService) {
+  pokemonImg:string;
+  pokemonTypes:any;
+  pokemonMoves:any;
+
+  constructor(private ParamsRouter:ActivatedRoute, private dataService: DataService) {
    }
 
-pokemonImg:string;
-pokemonTypes:any;
-pokemonMoves:any;
+  /**
+   * Init with centered header and hidden searchbar,
+   * share data of current pokemon.
+   */
   ngOnInit(): void {
-    this.dataService.currentPokemon.subscribe(pokemonData => this.pokemonData = pokemonData);
+    document.getElementById("header").style.justifyContent = "center";
+    document.getElementById('searchBar').style.display = 'none'
+    this.dataService.currentPokemon.subscribe(pokemonData => this.pokemonData = pokemonData); 
     this.assignPokemonInfo();
   }
 
@@ -26,7 +33,18 @@ pokemonMoves:any;
    */
   assignPokemonInfo(){
     this.pokemonImg= this.pokemonData.sprites.front_default;
-    this.pokemonTypes= this.pokemonData.types;
-    this.pokemonMoves= this.pokemonData.moves;
+    this.pokemonTypes= this.pokemonData.types;  
+    this.convertPokemonMoves();
+  }
+
+  /**
+   * Converte array of pokemon moves from (for example: "big-fireball" to  "big fireball")
+   */
+  convertPokemonMoves(){
+    let pokemonMoves=[];
+    for (let i=0; i<3; i++){
+      pokemonMoves.push(this.pokemonData.moves[i].move.name.replace(/-/g, " "));
+    }
+    this.pokemonMoves=pokemonMoves;
   }
 }
