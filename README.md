@@ -1,7 +1,7 @@
 
 
-# Incomes-table fetching app
-Simple app made for fetching and displaying data
+# Pokedex app
+Pokedex lets you see pokemons.
 ## Table of contents
 * [General info](#general-info)
 * [Technologies](#technologies)
